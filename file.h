@@ -5,6 +5,8 @@
 #ifndef FILE_INI_FILE_H
 #define FILE_INI_FILE_H
 using namespace std;
+#include <vector>
+
 class leggi_file{
 public:
     leggi_file() ;
@@ -15,7 +17,7 @@ public:
 
 private:
     FILE *fp;
-    string mat[30];
+    vector<string> mat;
 
 };
 

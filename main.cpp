@@ -42,7 +42,7 @@ int leggi_file::leggi() {
     while(!feof(fp)){
         cout << "lettura...." << endl;
         fscanf(fp,"%s",buffer);
-        mat[count] = buffer;
+        mat.push_back(buffer);
         count++;
 
     }
