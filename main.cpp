@@ -1,83 +1,57 @@
+#include <string>
 #include <iostream>
-#include <cstdio>
-#include <cstddef>
+#include <fstream>
+#include <vector>
 #include "file.h"
 
 using namespace std;
 
-/*****
- * leggi_file()
- * Costruttore
+/*
+ * leggi_file::apri(string s)
+ * apre il file specificato nel parametro s
  */
-leggi_file::leggi_file(){
-    //mat = new string[30];
+void leggi_file::apri(string s) {
+    in.open(s);
 }
-
-/*****
- * ~leggi_file()
- * Distruttore
+/*
+ * leggi_file::leggi()
+ * legge il file aperto e restituisce l'indice di lettura
  */
-leggi_file::~leggi_file(){
-    cout << "Distruttore, libera la memoria dell'array!";
-    //delete mat;
+void leggi_file::leggi() {
+
+    string buffer;
+    while(getline(in,buffer))
+        mat.emplace_back(buffer);
 }
 
-
-int leggi_file::apri(char * f,const char * m) {
-    fp=fopen(f,m);
-    if(fp==NULL) {
-        cout << "error opening file" << endl;
-        return 1;
-    }else{
-        cout << "file opened\n" << endl;
-        return 0;
-    }
-
-}
-
-int leggi_file::leggi() {
-
-    int count=0;
-    char buffer[200];
-    while(!feof(fp)){
-        cout << "lettura...." << endl;
-        fscanf(fp,"%s",buffer);
-        mat.push_back(buffer);
-        count++;
-
-    }
-    fclose(fp);
-    return count;
-}
-
-int leggi_file::stampa(int value){
+/*
+ * leggi_file::stampa()
+ * stampa il file a video
+ */
+int leggi_file::stampa(){
     int ciclo;
-    cout << "stampa a video... "<< endl;
 
-    for(ciclo=0; ciclo < value; ciclo++) {
+    for(ciclo=0; ciclo < mat.size(); ciclo++) {
             cout << " - " << mat[ciclo] << endl;
-            //free(buffer[ciclo]);
     }
     return 0;
 }
 
-
+/*
+ * main function
+ */
 
 int main(int argc, char **argv) {
-    if(argv[1]==NULL){
+    if(argv[1]==nullptr || argc==0){
         cout <<"no parameter....."<<endl;
         return 1;
     }else {
-        const char *m = "r+";
-        leggi_file *o;
-        o = new leggi_file();
-        int i;
-        o->apri(argv[1], m);
-        i = o->leggi();
-        cout << "\nNumero righe: " << i << "\n";
-        o->stampa(i);
-        std::cout << "\nall done!" << std::endl;
-        delete o;
+        leggi_file *file_text;
+        file_text = new leggi_file();
+        file_text->apri(argv[1]);
+        file_text->leggi();
+        file_text->stampa();
+        delete file_text;
         return 0;
     }
 }

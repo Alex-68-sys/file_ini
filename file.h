@@ -9,14 +9,14 @@ using namespace std;
 
 class leggi_file{
 public:
-    leggi_file() ;
-    ~leggi_file();
-    int apri(char * f,const char * m);
-    int leggi();
-    int stampa(int value);
+    leggi_file() = default;
+    ~leggi_file() = default;
+    void apri(string);
+    void leggi();
+    int stampa();
 
 private:
-    FILE *fp;
+    fstream in;
     vector<string> mat;
 
 };
