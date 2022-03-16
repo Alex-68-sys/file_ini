@@ -4,14 +4,19 @@
 
 #ifndef FILE_INI_FILE_H
 #define FILE_INI_FILE_H
-using namespace std;
 #include <vector>
+#include <fstream>
+#include <string>
+#include <iostream>
+
+using namespace std;
+
 
 class leggi_file{
 public:
     leggi_file() = default;
     ~leggi_file() = default;
-    void apri(string);
+    bool apri(string);
     void leggi();
     int stampa();
 

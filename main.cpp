@@ -1,27 +1,36 @@
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <vector>
+
 #include "file.h"
 
 using namespace std;
 
 /*
  * leggi_file::apri(string s)
- * apre il file specificato nel parametro s
+ * apre il file specificato nel parametro name
  */
-void leggi_file::apri(string s) {
-    in.open(s);
+bool leggi_file::apri(const string name) {
+    string str(name);
+    size_t pos = str.rfind('.');
+    if (pos != string::npos) {
+        string ext = str.substr(++pos);
+        if (ext != "ini") {
+            cout << "Error extension file"<<endl;
+            return false;
+        }
+    }
+     in.open(name);
+     return true;
+
 }
 /*
  * leggi_file::leggi()
- * legge il file aperto e restituisce l'indice di lettura
+ * legge il file aperto
  */
 void leggi_file::leggi() {
 
     string buffer;
     while(getline(in,buffer))
-        mat.emplace_back(buffer);
+        mat.push_back(buffer);
+    in.close();
 }
 
 /*
@@ -32,7 +41,7 @@ int leggi_file::stampa(){
     int ciclo;
 
     for(ciclo=0; ciclo < mat.size(); ciclo++) {
-            cout << " - " << mat[ciclo] << endl;
+            cout << " " << mat[ciclo] << endl;
     }
     return 0;
 }
@@ -48,7 +57,11 @@ int main(int argc, char **argv) {
     }else {
         leggi_file *file_text;
         file_text = new leggi_file();
-        file_text->apri(argv[1]);
+        if(!file_text->apri(argv[1]))
+        {
+            cout << "Some errors occured!"<<endl;
+            return 2;
+        }
         file_text->leggi();
         file_text->stampa();
         delete file_text;
