@@ -3,6 +3,7 @@
 *
 */
 #include "file.h"
+#include "version.h"
 
 using namespace std;
 
@@ -51,6 +52,7 @@ int leggi_file::stampa(){
  */
 
 int main(int argc, char **argv) {
+    cout << "File ini version: " << VERSION << endl;
     if(argv[1]==nullptr || argc==0){
         cout <<"no parameter....."<<endl;
         return 1;
