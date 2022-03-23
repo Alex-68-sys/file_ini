@@ -30,6 +30,7 @@ void leggi_file::leggi() {
     string buffer;
     while(getline(in,buffer))
         mat.push_back(buffer);
+    in.close();
 }
 
 /*
