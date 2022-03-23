@@ -9,14 +9,11 @@ using namespace std;
  */
 bool leggi_file::apri(const string name) {
     string str(name);
-    size_t pos = str.rfind('.');
-    if (pos != string::npos) {
-        string ext = str.substr(++pos);
-        if (ext != "ini") {
-            cout << "Error extension file"<<endl;
+    string fileExt = name.substr(name.find_last_of(".") + 1);
+        if (fileExt!= "ini") {
+            cout << "Error extension file" << endl;
             return false;
         }
-    }
      in.open(name);
      return true;
 
@@ -30,7 +27,6 @@ void leggi_file::leggi() {
     string buffer;
     while(getline(in,buffer))
         mat.push_back(buffer);
-    in.close();
 }
 
 /*

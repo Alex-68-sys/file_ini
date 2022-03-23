@@ -14,8 +14,8 @@ using namespace std;
 
 class leggi_file{
 public:
-    leggi_file() = default;
-    ~leggi_file() = default;
+    leggi_file() {};
+    ~leggi_file() { in.close();};
     bool apri(string);
     void leggi();
     int stampa();
