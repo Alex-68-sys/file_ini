@@ -5,6 +5,6 @@
 #ifndef FILE_INI_VERSION_H
 #define FILE_INI_VERSION_H
 
-#define VERSION 1.3
+const std::string VERSION="1.3";
 
 #endif //FILE_INI_VERSION_H
