@@ -12,13 +12,13 @@
 using namespace std;
 
 
-class Read_File_INI{
+class ReadFileIni{
 public:
-    Read_File_INI() {};
-    ~Read_File_INI() { };
-    bool Open_File(string);
-    void Read_Open_File();
-    int Video_Visualize();
+    ReadFileIni() {};
+    ~ReadFileIni() { };
+    bool OpenFileIni(string);
+    void ReadOpenFile();
+    int VideoVisualize();
 
 private:
     fstream File_in_input;

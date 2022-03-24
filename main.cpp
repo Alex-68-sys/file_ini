@@ -8,10 +8,10 @@
 using namespace std;
 
 /*
- * Read_File_INI::Open_File(string s)
+ * ReadFileIni::OpenFileIni(string s)
  * apre il file specificato nel parametro name
  */
-bool Read_File_INI::Open_File(string) {
+bool ReadFileIni::OpenFileIni(string) {
     string str(name);
     string fileExt = name.substr(name.find_last_of(".") + 1);
         if (fileExt!= "ini") {
@@ -23,10 +23,10 @@ bool Read_File_INI::Open_File(string) {
 
 }
 /*
- * Read_File_INI::Read_Open_File()
+ * ReadFileIni::ReadOpenFile()
  * legge il file aperto
  */
-void Read_File_INI::Read_Open_File() {
+void ReadFileIni::ReadOpenFile() {
 
     string buffer;
     while(getline(File_in_input, buffer))
@@ -35,10 +35,10 @@ void Read_File_INI::Read_Open_File() {
 }
 
 /*
- * Read_File_INI::stampa()
- * Video_Visualize il file a video
+ * ReadFileIni::stampa()
+ * VideoVisualize il file a video
  */
-int Read_File_INI::Video_Visualize(){
+int ReadFileIni::VideoVisualize(){
     int ciclo;
 
     for(ciclo=0; ciclo < line_Of_File.size(); ciclo++) {
@@ -58,15 +58,15 @@ int main(int argc, char **argv) {
         cout <<"use file_ini file_in_input.ini" <<endl;
         return 1;
     }else {
-        Read_File_INI *file_ini_text;
-        file_ini_text = new Read_File_INI();
-        if(!file_ini_text->Open_File(argv[1]))
+        ReadFileIni *file_ini_text;
+        file_ini_text = new ReadFileIni();
+        if(!file_ini_text->OpenFileIni(argv[1]))
         {
             cout << "Some errors occured!"<<endl;
             return 2;
         }
-        file_ini_text->Read_Open_File();
-        file_ini_text->Video_Visualize();
+        file_ini_text->ReadOpenFile();
+        file_ini_text->VideoVisualize();
         delete file_ini_text;
         return 0;
     }
