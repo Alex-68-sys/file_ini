@@ -8,41 +8,41 @@
 using namespace std;
 
 /*
- * leggi_file::apri(string s)
+ * Read_File_INI::Open_File(string s)
  * apre il file specificato nel parametro name
  */
-bool leggi_file::apri(const string name) {
+bool Read_File_INI::Open_File(string) {
     string str(name);
     string fileExt = name.substr(name.find_last_of(".") + 1);
         if (fileExt!= "ini") {
             cout << "Error extension file" << endl;
             return false;
         }
-     in.open(name);
+     File_in_input.open(name);
      return true;
 
 }
 /*
- * leggi_file::leggi()
+ * Read_File_INI::Read_Open_File()
  * legge il file aperto
  */
-void leggi_file::leggi() {
+void Read_File_INI::Read_Open_File() {
 
     string buffer;
-    while(getline(in,buffer))
-        mat.push_back(buffer);
-    in.close();
+    while(getline(File_in_input, buffer))
+        line_Of_File.push_back(buffer);
+    File_in_input.close();
 }
 
 /*
- * leggi_file::stampa()
- * stampa il file a video
+ * Read_File_INI::stampa()
+ * Video_Visualize il file a video
  */
-int leggi_file::stampa(){
+int Read_File_INI::Video_Visualize(){
     int ciclo;
 
-    for(ciclo=0; ciclo < mat.size(); ciclo++) {
-            cout << " " << mat[ciclo] << endl;
+    for(ciclo=0; ciclo < line_Of_File.size(); ciclo++) {
+            cout << " " << line_Of_File[ciclo] << endl;
     }
     return 0;
 }
@@ -55,18 +55,19 @@ int main(int argc, char **argv) {
     cout << "File ini version: " << VERSION << endl;
     if(argv[1]==nullptr || argc==0){
         cout <<"no parameter....."<<endl;
+        cout <<"use file_ini file_in_input.ini" <<endl;
         return 1;
     }else {
-        leggi_file *file_text;
-        file_text = new leggi_file();
-        if(!file_text->apri(argv[1]))
+        Read_File_INI *file_ini_text;
+        file_ini_text = new Read_File_INI();
+        if(!file_ini_text->Open_File(argv[1]))
         {
             cout << "Some errors occured!"<<endl;
             return 2;
         }
-        file_text->leggi();
-        file_text->stampa();
-        delete file_text;
+        file_ini_text->Read_Open_File();
+        file_ini_text->Video_Visualize();
+        delete file_ini_text;
         return 0;
     }
 }

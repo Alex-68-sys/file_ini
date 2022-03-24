@@ -12,17 +12,17 @@
 using namespace std;
 
 
-class leggi_file{
+class Read_File_INI{
 public:
-    leggi_file() {};
-    ~leggi_file() { };
-    bool apri(string);
-    void leggi();
-    int stampa();
+    Read_File_INI() {};
+    ~Read_File_INI() { };
+    bool Open_File(string);
+    void Read_Open_File();
+    int Video_Visualize();
 
 private:
-    fstream in;
-    vector<string> mat;
+    fstream File_in_input;
+    vector<string> line_Of_File;
 
 };
 
