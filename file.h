@@ -16,12 +16,14 @@ class ReadFileIni{
 public:
     ReadFileIni() {};
     ~ReadFileIni() { };
-    bool OpenFileIni(string);
+    bool OpenFileIni(string nameOfFileinput);
     void ReadOpenFile();
     int VideoVisualize();
+    void SaveOpenFile(string nameOfFileoutput);
 
 private:
     fstream File_in_input;
+    filebuf File_in_output;
     vector<string> line_Of_File;
 
 };
