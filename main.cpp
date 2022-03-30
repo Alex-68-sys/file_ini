@@ -11,14 +11,14 @@ using namespace std;
  * ReadFileIni::OpenFileIni(string s)
  * apre il file specificato nel parametro nameOfFileinput
  */
-bool ReadFileIni::OpenFileIni(string nameOfFileinput) {
-    string str(nameOfFileinput);
-    string fileExt = nameOfFileinput.substr(nameOfFileinput.find_last_of(".") + 1);
+bool ReadFileIni::OpenFileIni(string name_of_file_input) {
+    string str(name_of_file_input);
+    string fileExt = name_of_file_input.substr(name_of_file_input.find_last_of(".") + 1);
         if (fileExt!= "ini") {
             cout << "Error extension file" << endl;
             return false;
         }
-     File_in_input.open(nameOfFileinput);
+     File_in_input.open(name_of_file_input);
      return true;
 
 }
@@ -52,6 +52,7 @@ void ReadFileIni::SaveOpenFile(string name) {
     ostream os(&File_in_output);
     for(int cicle=0;cicle<line_Of_File.size();cicle++)
       os << line_Of_File[cicle]<<"\n";
+    cout <<"File Saved!"<<endl;
     File_in_output.close();
 }
 
@@ -66,17 +67,15 @@ int main(int argc, char **argv) {
         cout <<"use file_ini file_in_input.ini" <<endl;
         return 1;
     }else {
-        ReadFileIni *file_ini;
-        file_ini = new ReadFileIni();
-        if(!file_ini->OpenFileIni(argv[1]))
+        ReadFileIni file_ini;
+        if(!file_ini.OpenFileIni(argv[1]))
         {
             cout << "Some errors occured!"<<endl;
             return 2;
         }
-        file_ini->ReadOpenFile();
-        file_ini->VideoVisualize();
-        file_ini->SaveOpenFile(argv[1]);
-        delete file_ini;
+        file_ini.ReadOpenFile();
+        file_ini.VideoVisualize();
+        file_ini.SaveOpenFile(argv[1]);
         return 0;
     }
 }
