@@ -1,5 +1,5 @@
 /*
-* File Created BY Alessandro Bardossi
+* File Created by Alessandro Bardossi
 *
 */
 #include "file.h"
@@ -46,9 +46,9 @@ int ReadFileIni::VideoVisualize(){
     return 0;
 }
 
-void ReadFileIni::SaveOpenFile(string name) {
+void ReadFileIni::SaveOpenFile(string name_of_file_output) {
 
-    File_in_output.open (name,std::ios::out);
+    File_in_output.open (name_of_file_output, std::ios::out);
     ostream os(&File_in_output);
     for(auto & i : line_Of_File)
       os << i << "\n";
@@ -61,20 +61,20 @@ void ReadFileIni::SaveOpenFile(string name) {
  */
 
 int main() {
-    string name;
+    string name_file_ini;
     cout << "File ini version: " << VERSION << endl;
 
-    cout << "Insert a name of file ini" << endl;
-    cin >> name;
+    cout << "Insert a name_file_ini of file ini" << endl;
+    cin >> name_file_ini;
     ReadFileIni file_ini;
-    if(!file_ini.OpenFileIni(name))
+    if(!file_ini.OpenFileIni(name_file_ini))
     {
        cout << "Some errors occured!"<<endl;
        return 2;
     }
     file_ini.ReadOpenFile();
     file_ini.VideoVisualize();
-    file_ini.SaveOpenFile(name);
+    file_ini.SaveOpenFile(name_file_ini);
     return 0;
 
 }
