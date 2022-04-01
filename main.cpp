@@ -50,8 +50,8 @@ void ReadFileIni::SaveOpenFile(string name) {
 
     File_in_output.open (name,std::ios::out);
     ostream os(&File_in_output);
-    for(int cicle=0;cicle<line_Of_File.size();cicle++)
-      os << line_Of_File[cicle]<<"\n";
+    for(auto & i : line_Of_File)
+      os << i << "\n";
     cout <<"File Saved!"<<endl;
     File_in_output.close();
 }
@@ -60,22 +60,21 @@ void ReadFileIni::SaveOpenFile(string name) {
  * main function
  */
 
-int main(int argc, char **argv) {
+int main() {
+    string name;
     cout << "File ini version: " << VERSION << endl;
-    if(argv[1]==nullptr || argc==0){
-        cout <<"no parameter....."<<endl;
-        cout <<"use file_ini file_in_input.ini" <<endl;
-        return 1;
-    }else {
-        ReadFileIni file_ini;
-        if(!file_ini.OpenFileIni(argv[1]))
-        {
-            cout << "Some errors occured!"<<endl;
-            return 2;
-        }
-        file_ini.ReadOpenFile();
-        file_ini.VideoVisualize();
-        file_ini.SaveOpenFile(argv[1]);
-        return 0;
+
+    cout << "Insert a name of file ini" << endl;
+    cin >> name;
+    ReadFileIni file_ini;
+    if(!file_ini.OpenFileIni(name))
+    {
+       cout << "Some errors occured!"<<endl;
+       return 2;
     }
+    file_ini.ReadOpenFile();
+    file_ini.VideoVisualize();
+    file_ini.SaveOpenFile(name);
+    return 0;
+
 }
