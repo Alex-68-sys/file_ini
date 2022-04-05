@@ -10,14 +10,14 @@ using namespace std;
  * ReadFileIni::OpenFileIni(string s)
  * apre il file specificato nel parametro nameOfFileinput
  */
-bool ReadFileIni::OpenFileIni(string namefile) {
-    string str(namefile);
-    string fileExt = namefile.substr(namefile.find_last_of(".") + 1);
+bool ReadFileIni::OpenFileIni(string nameFileInput) {
+    string str(nameFileInput);
+    string fileExt = nameFileInput.substr(nameFileInput.find_last_of(".") + 1);
     if (fileExt!= "ini") {
         cout << "Error extension file" << endl;
         return false;
     }
-    File_in_input.open(namefile);
+    File_in_input.open(nameFileInput);
     return true;
 
 }
@@ -45,9 +45,9 @@ int ReadFileIni::VideoVisualize(){
     return 0;
 }
 
-void ReadFileIni::SaveOpenFile(string name_of_file_output) {
+void ReadFileIni::SaveOpenFile(string nameFileOutput) {
 
-    File_in_output.open (name_of_file_output, std::ios::out);
+    File_in_output.open (nameFileOutput, std::ios::out);
     ostream os(&File_in_output);
     for(auto & i : line_Of_File)
         os << i << "\n";

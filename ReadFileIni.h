@@ -16,10 +16,10 @@ using namespace std;
 class ReadFileIni{
 
 public:
-    bool OpenFileIni(string nameFile);
+    bool OpenFileIni(string nameFileInput);
     void ReadOpenFile();
     int VideoVisualize();
-    void SaveOpenFile(string File_in_output);
+    void SaveOpenFile(string nameFileOutput);
 
 private:
     fstream File_in_input;
