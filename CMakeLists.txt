@@ -3,4 +3,4 @@ project(file_ini)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(file_ini main.cpp file.h version.h)
+add_executable(file_ini main.cpp ReadFileIni.cpp ReadFileIni.h version.h)

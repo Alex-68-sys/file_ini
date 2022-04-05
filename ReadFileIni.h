@@ -1,9 +1,10 @@
 //
-// Created by Alessandro on 06/06/2021.
+// Created by Alessandro on 05/04/2022.
 //
 
-#ifndef FILE_INI_FILE_H
-#define FILE_INI_FILE_H
+#ifndef FILE_INI_READFILEINI_H
+#define FILE_INI_READFILEINI_H
+
 #include <vector>
 #include <fstream>
 #include <string>
@@ -18,7 +19,7 @@ public:
     bool OpenFileIni(string nameFile);
     void ReadOpenFile();
     int VideoVisualize();
-    void SaveOpenFile(string name_of_file_output);
+    void SaveOpenFile(string File_in_output);
 
 private:
     fstream File_in_input;
@@ -28,4 +29,4 @@ private:
 };
 
 
-#endif //FILE_INI_FILE_H
+#endif //FILE_INI_READFILEINI_H
