@@ -1,5 +1,4 @@
 *.exe
 *.obj
 cmake-build-debug
-googletest-main
 googletest
