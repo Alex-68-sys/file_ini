@@ -9,6 +9,8 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <algorithm>
+#include <ctype.h>
 
 using namespace std;
 
@@ -16,15 +18,20 @@ using namespace std;
 class ReadFileIni{
 
 public:
-    bool OpenFileIni(string nameFileInput);
-    void ReadOpenFile();
-    int VideoVisualize();
-    void SaveOpenFile(string nameFileOutput);
+    bool OpenFileIni(string& nameFileInput);
+    void readFile();
+    vector<string> readSection(string& section_input);
+    vector<string> readParameter(string& param);
+    void saveFile(string& nameFileOutput);
+    void setSection(string& sec);
+    void setParameter(string& param);
 
 private:
     fstream File_in_input;
     filebuf File_in_output;
     vector<string> line_Of_File;
+    vector<string>section;
+    vector<string>parameter;
 
 };
 

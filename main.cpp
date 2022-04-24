@@ -21,9 +21,9 @@ int main() {
        cout << "Some errors occured!"<<endl;
        return 2;
     }
-    file_ini.ReadOpenFile();
+    file_ini.readFile();
     file_ini.VideoVisualize();
-    file_ini.SaveOpenFile(name_file_ini);
+    file_ini.saveFile(name_file_ini);
     return 0;
 
 }

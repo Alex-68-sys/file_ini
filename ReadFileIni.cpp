@@ -10,8 +10,7 @@ using namespace std;
  * ReadFileIni::OpenFileIni(string s)
  * apre il file specificato nel parametro nameOfFileinput
  */
-bool ReadFileIni::OpenFileIni(string nameFileInput) {
-    string str(nameFileInput);
+bool ReadFileIni::OpenFileIni(string& nameFileInput) {
     string fileExt = nameFileInput.substr(nameFileInput.find_last_of(".") + 1);
     if (fileExt!= "ini") {
         cout << "Error extension file" << endl;
@@ -22,10 +21,10 @@ bool ReadFileIni::OpenFileIni(string nameFileInput) {
 
 }
 /*
- * ReadFileIni::ReadOpenFile()
+ * ReadFileIni::readFile()
  * legge il file aperto
  */
-void ReadFileIni::ReadOpenFile() {
+void ReadFileIni::readFile() {
 
     string buffer;
     while(getline(File_in_input, buffer))
@@ -33,19 +32,8 @@ void ReadFileIni::ReadOpenFile() {
     File_in_input.close();
 }
 
-/*
- * ReadFileIni::stampa()
- * VideoVisualize il file a video
- */
-int ReadFileIni::VideoVisualize(){
-    int cicle;
-    for(cicle=0; cicle < line_Of_File.size(); cicle++) {
-        cout << " " << line_Of_File[cicle] << endl;
-    }
-    return 0;
-}
 
-void ReadFileIni::SaveOpenFile(string nameFileOutput) {
+void ReadFileIni::saveFile(string& nameFileOutput) {
 
     File_in_output.open (nameFileOutput, std::ios::out);
     ostream os(&File_in_output);
@@ -53,4 +41,39 @@ void ReadFileIni::SaveOpenFile(string nameFileOutput) {
         os << i << "\n";
     cout <<"File Saved!"<<endl;
     File_in_output.close();
+}
+
+vector<string> ReadFileIni::readSection(string& section_input) {
+    string tmp;
+    while(getline(File_in_input,tmp)){
+        if (tmp[0]=='['){
+            if(tmp==section_input){
+                section.push_back(tmp);
+            }
+        }
+    }
+    return section;
+}
+
+vector<string> ReadFileIni::readParameter(string& param) {
+    string tmp;
+    while(getline(File_in_input,tmp)){
+        if(tmp[0]=='['){
+            int i=1;
+            while (tmp[i]!=']')
+                i++;
+        }
+        if(tmp==param) {
+            parameter.push_back(tmp);
+        }
+    }
+    return parameter;
+}
+
+void ReadFileIni::setSection(string& sec) {
+
+}
+
+void ReadFileIni::setParameter(string& param) {
+
 }
