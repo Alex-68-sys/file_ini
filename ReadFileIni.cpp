@@ -43,34 +43,51 @@ void ReadFileIni::saveFile(string& nameFileOutput) {
     File_in_output.close();
 }
 
-vector<string> ReadFileIni::readSection(string& section_input) {
+string ReadFileIni::readSection(string& section_input) {
     string tmp;
     while(getline(File_in_input,tmp)){
         if (tmp[0]=='['){
             if(tmp==section_input){
-                section.push_back(tmp);
+                cout << "Section found!" << endl;
+                section=tmp;
             }
         }
+        if(tmp[0] == '#' || tmp.empty())
+            continue;
     }
     return section;
 }
 
-vector<string> ReadFileIni::readParameter(string& param) {
+string ReadFileIni::readParameter(string& param_input) {
     string tmp;
     while(getline(File_in_input,tmp)){
         if(tmp[0]=='['){
-            int i=1;
-            while (tmp[i]!=']')
-                i++;
+           continue;
         }
-        if(tmp==param) {
-            parameter.push_back(tmp);
+        if(tmp[0] == '#' || tmp.empty())
+            continue;
+        if(tmp==param_input) {
+            cout << "Parameter found!" << endl;
+            parameter=tmp;
         }
     }
     return parameter;
 }
 
-void ReadFileIni::setSection(string& sec) {
+void ReadFileIni::setSection(string& sec,string& Fileinoutput) {
+    File_in_output.open (Fileinoutput, std::ios::out);
+    ostream os(&File_in_output);
+    string tmp;
+   for(int i=0;i<line_Of_File.size();i++){
+        if(line_Of_File[0]=="["){
+            if(line_Of_File[i]!=sec) {
+                os << sec;
+                i--;
+            }
+        }else{
+            os << line_Of_File[i];
+        }
+    }
 
 }
 

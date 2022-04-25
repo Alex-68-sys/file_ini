@@ -20,18 +20,18 @@ class ReadFileIni{
 public:
     bool OpenFileIni(string& nameFileInput);
     void readFile();
-    vector<string> readSection(string& section_input);
-    vector<string> readParameter(string& param);
+    string readSection(string& section_input);
+    string readParameter(string& param_input);
     void saveFile(string& nameFileOutput);
-    void setSection(string& sec);
+    void setSection(string& sec,string& Fileinoutput);
     void setParameter(string& param);
 
 private:
     fstream File_in_input;
     filebuf File_in_output;
     vector<string> line_Of_File;
-    vector<string>section;
-    vector<string>parameter;
+    string section;
+    string parameter;
 
 };
 
