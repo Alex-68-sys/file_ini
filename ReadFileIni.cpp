@@ -43,14 +43,13 @@ void ReadFileIni::saveFile(string& nameFileOutput) {
     File_in_output.close();
 }
 
-string ReadFileIni::readSection(string& section_input) {
+string ReadFileIni::readSection(const string &section_input) {
     string tmp;
-    while(getline(File_in_input,tmp)){
-        if (tmp[0]=='['){
-            if(tmp==section_input){
+    while(!File_in_input.eof()){
+        getline(File_in_input,tmp);
+        if(tmp==section_input){
                 cout << "Section found!" << endl;
                 section=tmp;
-            }
         }
         if(tmp[0] == '#' || tmp.empty())
             continue;
@@ -58,39 +57,28 @@ string ReadFileIni::readSection(string& section_input) {
     return section;
 }
 
-string ReadFileIni::readParameter(string& param_input) {
+string ReadFileIni::readParameter(const string &param_input) {
     string tmp;
-    while(getline(File_in_input,tmp)){
-        if(tmp[0]=='['){
-           continue;
-        }
-        if(tmp[0] == '#' || tmp.empty())
-            continue;
+    while(!File_in_input.eof()){
+        getline(File_in_input,tmp);
         if(tmp==param_input) {
             cout << "Parameter found!" << endl;
             parameter=tmp;
-        }
+        }else
+            parameter="parameter not found!";
     }
     return parameter;
 }
 
-void ReadFileIni::setSection(string& sec,string& Fileinoutput) {
-    File_in_output.open (Fileinoutput, std::ios::out);
+void ReadFileIni::setSection(const string &sec, string &file) {
+    File_in_output.open(file,std::ios::app);
     ostream os(&File_in_output);
-    string tmp;
-   for(int i=0;i<line_Of_File.size();i++){
-        if(line_Of_File[0]=="["){
-            if(line_Of_File[i]!=sec) {
-                os << sec;
-                i--;
-            }
-        }else{
-            os << line_Of_File[i];
-        }
-    }
+    os << "\n" << sec;
 
 }
 
-void ReadFileIni::setParameter(string& param) {
+void ReadFileIni::setParameter(string &param) {
+    ostream os(&File_in_output);
+
 
 }
