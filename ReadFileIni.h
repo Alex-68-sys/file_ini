@@ -10,7 +10,8 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
-#include <ctype.h>
+#include <cctype>
+#include <map>
 
 using namespace std;
 
@@ -31,6 +32,7 @@ private:
     vector<string> line_Of_File;
     string section;
     string parameter;
+    map<string,string> section_file;
 
 };
 
