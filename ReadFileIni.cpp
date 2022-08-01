@@ -17,21 +17,12 @@ bool ReadFileIni::OpenFileIni(string& nameFileInput) {
         return false;
     }
     File_in_input.open(nameFileInput);
-    return true;
-
-}
-/*
- * ReadFileIni::readFile()
- * legge il file aperto
- */
-void ReadFileIni::readFile() {
-
     string buffer;
     while(getline(File_in_input, buffer))
         line_Of_File.push_back(buffer);
-    File_in_input.close();
-}
+    return true;
 
+}
 
 void ReadFileIni::saveFile(string& nameFileOutput) {
 
@@ -45,28 +36,32 @@ void ReadFileIni::saveFile(string& nameFileOutput) {
 
 string ReadFileIni::readSection(const string &section_input) {
     string tmp;
-    while(!File_in_input.eof()){
-        getline(File_in_input,tmp);
-        if(tmp==section_input){
-                cout << "Section found!" << endl;
-                section=tmp;
-        }
-        if(tmp[0] == '#' || tmp.empty())
+    for(auto & i: line_Of_File) {
+        if (i[0] == '#' || tmp.empty())
             continue;
+        if (i == section_input) {
+            cout << "Section found!" << endl;
+            section = tmp;
+        }else
+            section="not found";
     }
     return section;
 }
 
-string ReadFileIni::readParameter(const string &param_input) {
+string ReadFileIni::readParameter(const string &param_input,string section) {
     string tmp;
-    while(!File_in_input.eof()){
-        getline(File_in_input,tmp);
-        if(tmp==param_input) {
-            cout << "Parameter found!" << endl;
-            parameter=tmp;
-        }else
-            parameter="parameter not found!";
-    }
+    bool flag = false;
+   for(auto & i :line_Of_File) {
+       if(i==section) {
+           if (i[0] == '#' || tmp[0] == '[')
+               continue;
+           if (i == param_input) {
+               cout << "Parameter found!" << endl;
+               parameter = tmp;
+           } else
+               parameter = "not found";
+        }
+       }
     return parameter;
 }
 
@@ -77,7 +72,7 @@ void ReadFileIni::setSection(const string &sec, string &file) {
 
 }
 
-void ReadFileIni::setParameter(string &param) {
+void ReadFileIni::setParameter(string &param,string section) {
     ostream os(&File_in_output);
 
 

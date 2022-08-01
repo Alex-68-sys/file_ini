@@ -19,12 +19,11 @@ class ReadFileIni{
 
 public:
     bool OpenFileIni(string& nameFileInput);
-    void readFile();
     string readSection(const string &section_input);
-    string readParameter(const string &param_input);
+    string readParameter(const string &param_input, string section);
     void saveFile(string& nameFileOutput);
     void setSection(const string &sec, string &file);
-    void setParameter(string &param);
+    void setParameter(string &param, string section);
 
 private:
     fstream File_in_input;
