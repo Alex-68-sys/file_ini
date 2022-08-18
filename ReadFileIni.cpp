@@ -37,11 +37,12 @@ void ReadFileIni::saveFile(string& nameFileOutput) {
 string ReadFileIni::readSection(const string &section_input) {
     string tmp;
     for(auto & i: line_Of_File) {
-        if (i[0] == '#' || tmp.empty())
+        if (i[0] == '#' || i.empty())
             continue;
         if (i == section_input) {
             cout << "Section found!" << endl;
-            section = tmp;
+            section = i;
+            break;
         }else
             section="not found";
     }
@@ -52,15 +53,16 @@ string ReadFileIni::readParameter(const string &param_input,string section) {
     string tmp;
     bool flag = false;
    for(auto & i :line_Of_File) {
-       if(i==section) {
-           if (i[0] == '#' || tmp[0] == '[')
-               continue;
-           if (i == param_input) {
-               cout << "Parameter found!" << endl;
-               parameter = tmp;
-           } else
-               parameter = "not found";
-        }
+       if (i == section) {
+           for (auto &i: line_Of_File){
+               if (i == param_input) {
+                   cout << "Parameter found!" << endl;
+                   parameter = i;
+                   break;
+               } else
+                   parameter = "not found";
+       }
+   }
        }
     return parameter;
 }
