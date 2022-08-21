@@ -19,12 +19,12 @@ using namespace std;
 class ReadFileIni{
 
 public:
-    bool OpenFileIni(string& nameFileInput);
+    bool OpenFileIni(const string& nameFileInput);
     string readSection(const string &section_input);
     string readParameter(const string &param_input, string section);
-    void saveFile(string& nameFileOutput);
-    void setSection(const string &sec, string &file);
-    void setParameter(string &param, string section);
+    void saveFile(const string& nameFileOutput);
+    void setSection(const string &sec);
+    void setParameter(const string &param, string section);
 
 private:
     fstream File_in_input;
@@ -32,7 +32,6 @@ private:
     vector<string> line_Of_File;
     string section;
     string parameter;
-    map<string,string> section_file;
 
 };
 

@@ -10,7 +10,7 @@ using namespace std;
  * ReadFileIni::OpenFileIni(string s)
  * apre il file specificato nel parametro nameOfFileinput
  */
-bool ReadFileIni::OpenFileIni(string& nameFileInput) {
+bool ReadFileIni::OpenFileIni(const string& nameFileInput) {
     string fileExt = nameFileInput.substr(nameFileInput.find_last_of(".") + 1);
     if (fileExt!= "ini") {
         cout << "Error extension file" << endl;
@@ -24,7 +24,7 @@ bool ReadFileIni::OpenFileIni(string& nameFileInput) {
 
 }
 
-void ReadFileIni::saveFile(string& nameFileOutput) {
+void ReadFileIni::saveFile(const string& nameFileOutput) {
 
     File_in_output.open (nameFileOutput, std::ios::out);
     ostream os(&File_in_output);
@@ -50,8 +50,6 @@ string ReadFileIni::readSection(const string &section_input) {
 }
 
 string ReadFileIni::readParameter(const string &param_input,string section) {
-    string tmp;
-    bool flag = false;
    for(auto & i :line_Of_File) {
        if (i == section) {
            for (auto &i: line_Of_File){
@@ -67,15 +65,36 @@ string ReadFileIni::readParameter(const string &param_input,string section) {
     return parameter;
 }
 
-void ReadFileIni::setSection(const string &sec, string &file) {
-    File_in_output.open(file,std::ios::app);
-    ostream os(&File_in_output);
-    os << "\n" << sec;
+void ReadFileIni::setSection(const string &sec) {
+    vector<string>::iterator tmp;
+    bool flag=false;
+    tmp=line_Of_File.begin();
+    for(auto & i: line_Of_File){
+        if(i==sec){
+            flag=true;
+            break;
+        }
+        tmp++;
+    }
+    if(flag== false) {
+        line_Of_File.insert(tmp, " ");
+        line_Of_File.insert(tmp + 1, sec);
+        cout << "insert ok" << endl;
+    }
+    else
+        cout << "section already exist!"<<endl;
 
 }
 
-void ReadFileIni::setParameter(string &param,string section) {
-    ostream os(&File_in_output);
+void ReadFileIni::setParameter(const string &param, string section) {
+    vector<string>::iterator tmp;
+    tmp=line_Of_File.begin();
+    for(auto &i:line_Of_File){
+        if(i==section)
+            line_Of_File.insert(tmp+1,param);
+        else
+            tmp++;
+    }
 
 
 }
