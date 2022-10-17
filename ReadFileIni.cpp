@@ -40,7 +40,7 @@ string ReadFileIni::readSection(const string &section_input) {
         if (i[0] == '#' || i.empty())
             continue;
         if (i == section_input) {
-            cout << "Section found!" << endl;
+            //cout << "Section found!" << endl;
             section = i;
             break;
         }else
