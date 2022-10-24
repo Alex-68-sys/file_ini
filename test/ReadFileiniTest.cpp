@@ -14,4 +14,11 @@ TEST(ReadFileIni,defaultreadSection){
     ASSERT_EQ("[section1]",section);
 }
 
+TEST(ReadFileIni,readSectionfault){
+    string name_file_ini="test.ini";
+    string section;
+    ReadFileIni test_file_ini;
+    ASSERT_TRUE(test_file_ini.OpenFileIni(name_file_ini));
+    ASSERT_EQ("not found",test_file_ini.readSection("[section5]"));
+}
 
