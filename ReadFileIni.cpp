@@ -2,6 +2,7 @@
 // Created by Alessandro on 05/04/2022.
 //
 
+#include <jconfig.h>
 #include "ReadFileIni.h"
 
 using namespace std;
@@ -50,18 +51,31 @@ string ReadFileIni::readSection(const string &section_input) {
 }
 
 string ReadFileIni::readParameter(const string &param_input,string section) {
-   for(auto & i :line_Of_File) {
-       if (i == section) {
-           for (auto &i: line_Of_File){
-               if (i == param_input) {
-                   cout << "Parameter found!" << endl;
-                   parameter = i;
-                   break;
-               } else
-                   parameter = "not found";
-       }
-   }
-       }
+    string j;
+    boolean flag= true;
+    int k=0;
+    for(auto & i : line_Of_File) {
+         if (i == section) {
+             int k2=k;
+             while (flag) {
+                 j = line_Of_File[k2];
+                 if (j == "@@@@@@") {
+                     parameter = "not found";
+                     flag=false;
+                 }
+                 if (j == param_input) {
+                     //cout << "Parameter found!" << endl;
+                     parameter = j;
+                     flag=false;
+                 } else
+                     parameter = "not found";
+             k2++;
+             }
+
+         }
+         else
+            k++;
+    }
     return parameter;
 }
 
