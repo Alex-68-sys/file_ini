@@ -25,14 +25,16 @@ bool ReadFileIni::OpenFileIni(const string& nameFileInput) {
 
 }
 
-void ReadFileIni::saveFile(const string& nameFileOutput) {
-
+int ReadFileIni::saveFile(const string& nameFileOutput) {
+    int flag=0;
     File_in_output.open (nameFileOutput, std::ios::out);
     ostream os(&File_in_output);
     for(auto & i : line_Of_File)
         os << i << "\n";
     cout <<"File Saved!"<<endl;
+    flag=1;
     File_in_output.close();
+    return flag;
 }
 
 string ReadFileIni::readSection(const string &section_input) {
@@ -79,8 +81,9 @@ string ReadFileIni::readParameter(const string &param_input,string section) {
     return parameter;
 }
 
-void ReadFileIni::setSection(const string &sec) {
+boolean ReadFileIni::setSection(const string &sec) {
     vector<string>::iterator tmp;
+    bool success=false;
     bool flag=false;
     tmp=line_Of_File.begin();
     for(auto & i: line_Of_File){
@@ -94,21 +97,29 @@ void ReadFileIni::setSection(const string &sec) {
         line_Of_File.insert(tmp, " ");
         line_Of_File.insert(tmp + 1, sec);
         cout << "insert ok" << endl;
+        success=true;
     }
-    else
-        cout << "section already exist!"<<endl;
-
+    else {
+        cout << "section already exist!" << endl;
+        success=false;
+    }
+    return success;
 }
 
-void ReadFileIni::setParameter(const string &param, string section) {
+boolean ReadFileIni::setParameter(const string &param, string section) {
     vector<string>::iterator tmp;
+    bool success=false;
     tmp=line_Of_File.begin();
-    for(auto &i:line_Of_File){
-        if(i==section)
-            line_Of_File.insert(tmp+1,param);
-        else
+    for(auto &i:line_Of_File) {
+        if (i == section) {
+            line_Of_File.insert(tmp + 1, param);
+            success=true;
+            break;
+        }else{
             tmp++;
+            success=false;
+        }
     }
 
-
+    return success;
 }
