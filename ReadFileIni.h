@@ -12,7 +12,7 @@
 #include <algorithm>
 #include <cctype>
 #include <map>
-#include <rpcndr.h>
+//#include <rpcndr.h>
 
 using namespace std;
 
@@ -24,8 +24,8 @@ public:
     string readSection(const string &section_input);
     string readParameter(const string &param_input, string section);
     int saveFile(const string& nameFileOutput);
-    boolean setSection(const string &sec);
-    boolean setParameter(const string &param, string section);
+    bool setSection(const string &sec);
+    bool setParameter(const string &param, string section);
 
 private:
     fstream File_in_input;

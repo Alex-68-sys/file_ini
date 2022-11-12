@@ -81,7 +81,7 @@ string ReadFileIni::readParameter(const string &param_input,string section) {
     return parameter;
 }
 
-boolean ReadFileIni::setSection(const string &sec) {
+bool ReadFileIni::setSection(const string &sec) {
     vector<string>::iterator tmp;
     bool success=false;
     bool flag=false;
@@ -106,7 +106,7 @@ boolean ReadFileIni::setSection(const string &sec) {
     return success;
 }
 
-boolean ReadFileIni::setParameter(const string &param, string section) {
+bool ReadFileIni::setParameter(const string &param, string section) {
     vector<string>::iterator tmp;
     bool success=false;
     tmp=line_Of_File.begin();

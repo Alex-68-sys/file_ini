@@ -31,3 +31,17 @@ TEST(ReadFileIni,readParameterfault){
     ASSERT_TRUE(test_file_ini.OpenFileIni(name_file_ini));
     ASSERT_EQ("not found",test_file_ini.readParameter("parameter3=value3","[section1]"));
 }
+
+TEST(ReadFileIni,setSectiondefault){
+    string name_file_ini="test.ini";
+    ReadFileIni test_file_ini;
+    ASSERT_TRUE(test_file_ini.OpenFileIni(name_file_ini));
+    ASSERT_TRUE(test_file_ini.setSection("[section4]"));
+}
+
+TEST(ReadFileIni,setSectiondfault){
+    string name_file_ini="test.ini";
+    ReadFileIni test_file_ini;
+    ASSERT_TRUE(test_file_ini.OpenFileIni(name_file_ini));
+    ASSERT_FALSE(test_file_ini.setSection("[section3]"));
+}
