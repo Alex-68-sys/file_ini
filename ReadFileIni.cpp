@@ -61,7 +61,7 @@ string ReadFileIni::readParameter(const string &param_input,string section) {
              int k2=k;
              while (flag) {
                  j = line_Of_File[k2];
-                 if (j == "@@@@@@") {
+                 if (j == "#") {
                      parameter = "not found";
                      flag=false;
                  }
