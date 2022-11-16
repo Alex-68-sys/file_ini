@@ -45,3 +45,17 @@ TEST(ReadFileIni,setSectiondfault){
     ASSERT_TRUE(test_file_ini.OpenFileIni(name_file_ini));
     ASSERT_FALSE(test_file_ini.setSection("[section3]"));
 }
+
+TEST(ReadFileIni,setParameterdefault){
+    string name_file_ini="test.ini";
+    ReadFileIni test_file_ini;
+    ASSERT_TRUE(test_file_ini.OpenFileIni(name_file_ini));
+    ASSERT_TRUE(test_file_ini.setParameter("parameter=new","[section3]"));
+}
+
+TEST(ReadFileIni,setParameterfault){
+    string name_file_ini="test.ini";
+    ReadFileIni test_file_ini;
+    ASSERT_TRUE(test_file_ini.OpenFileIni(name_file_ini));
+    ASSERT_FALSE(test_file_ini.setParameter("parameter=new","[section5]"));
+}

@@ -52,7 +52,7 @@ string ReadFileIni::readSection(const string &section_input) {
     return section;
 }
 
-string ReadFileIni::readParameter(const string &param_input,string section) {
+string ReadFileIni::readParameter(const string &param_input,const string &section) {
     string j;
     boolean flag= true;
     int k=0;
@@ -94,7 +94,7 @@ bool ReadFileIni::setSection(const string &sec) {
         tmp++;
     }
     if(flag== false) {
-        line_Of_File.insert(tmp, " ");
+        line_Of_File.insert(tmp, "#");
         line_Of_File.insert(tmp + 1, sec);
         cout << "insert ok" << endl;
         success=true;
@@ -106,7 +106,7 @@ bool ReadFileIni::setSection(const string &sec) {
     return success;
 }
 
-bool ReadFileIni::setParameter(const string &param, string section) {
+bool ReadFileIni::setParameter(const string &param, const string &section) {
     vector<string>::iterator tmp;
     bool success=false;
     tmp=line_Of_File.begin();
