@@ -29,6 +29,9 @@ int main() {
     param=file_ini.readParameter("parameter3=value3","[section1]");
     cout <<"parameter: " << param << endl;
     file_ini.setSection("[section 4]");
+    file_ini.saveFile(name_file_ini);
+    file_ini.setParameter("parameter7=value7","[section 4]");
+    file_ini.saveFile(name_file_ini);
     //file_ini.saveFile(name_file_ini);
     return 0;
 

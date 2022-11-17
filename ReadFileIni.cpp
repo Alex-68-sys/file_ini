@@ -120,6 +120,10 @@ bool ReadFileIni::setParameter(const string &param, const string &section) {
             success=false;
         }
     }
+    if(success)
+        cout <<"found"<< endl;
+    else
+        cout <<"not found" << endl;
 
     return success;
 }
