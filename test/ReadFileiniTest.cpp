@@ -16,7 +16,7 @@ TEST(ReadFileIni,readSectionfault){
     string name_file_ini="test.ini";
     ReadFileIni test_file_ini;
     ASSERT_TRUE(test_file_ini.OpenFileIni(name_file_ini));
-    ASSERT_EQ("not found",test_file_ini.readSection("[section5]"));
+    ASSERT_THROW(test_file_ini.readSection("[section5]"),runtime_error);
 }
 
 TEST(ReadFileIni,defaultreadParameter){
@@ -29,7 +29,7 @@ TEST(ReadFileIni,readParameterfault){
     string name_file_ini="test.ini";
     ReadFileIni test_file_ini;
     ASSERT_TRUE(test_file_ini.OpenFileIni(name_file_ini));
-    ASSERT_EQ("not found",test_file_ini.readParameter("parameter3=value3","[section1]"));
+    ASSERT_THROW(test_file_ini.readParameter("parameter3=value3","[section1]"),runtime_error);
 }
 
 TEST(ReadFileIni,setSectiondefault){

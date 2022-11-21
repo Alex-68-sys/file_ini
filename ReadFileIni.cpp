@@ -37,8 +37,9 @@ int ReadFileIni::saveFile(const string& nameFileOutput) {
     return flag;
 }
 
-string ReadFileIni::readSection(const string &section_input) {
+string ReadFileIni::readSection(const string &section_input) const{
     string tmp;
+    string section;
     for(auto & i: line_Of_File) {
         if (i[0] == '#' || i.empty())
             continue;
@@ -49,11 +50,14 @@ string ReadFileIni::readSection(const string &section_input) {
         }else
             section="not found";
     }
+    if(section=="not found")
+        throw runtime_error("error");
     return section;
 }
 
-string ReadFileIni::readParameter(const string &param_input,const string &section) {
+string ReadFileIni::readParameter(const string &param_input,const string &section) const {
     string j;
+    string parameter;
     boolean flag= true;
     int k=0;
     for(auto & i : line_Of_File) {
@@ -62,7 +66,7 @@ string ReadFileIni::readParameter(const string &param_input,const string &sectio
              while (flag) {
                  j = line_Of_File[k2];
                  if (j == "#") {
-                     parameter = "not found";
+                     parameter="";
                      flag=false;
                  }
                  if (j == param_input) {
@@ -70,7 +74,7 @@ string ReadFileIni::readParameter(const string &param_input,const string &sectio
                      parameter = j;
                      flag=false;
                  } else
-                     parameter = "not found";
+                     parameter="not found";
              k2++;
              }
 
@@ -78,6 +82,8 @@ string ReadFileIni::readParameter(const string &param_input,const string &sectio
          else
             k++;
     }
+    if(parameter=="not found")
+        throw runtime_error("error");
     return parameter;
 }
 

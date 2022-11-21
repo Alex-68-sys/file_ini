@@ -21,8 +21,8 @@ class ReadFileIni{
 
 public:
     bool OpenFileIni(const string& nameFileInput);
-    string readSection(const string &section_input);
-    string readParameter(const string &param_input, const string &section);
+    string readSection(const string &section_input) const;
+    string readParameter(const string &param_input, const string &section) const;
     int saveFile(const string& nameFileOutput);
     bool setSection(const string &sec);
     bool setParameter(const string &param, const string &section);
@@ -31,8 +31,8 @@ private:
     fstream File_in_input;
     filebuf File_in_output;
     vector<string> line_Of_File;
-    string section;
-    string parameter;
+    //string section;
+    //string parameter;
 
 };
 
